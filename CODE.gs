@@ -5,8 +5,8 @@
  */
 
 function runFOIAPipeline() {
-  const FOLDER_ID = 'YOUR_FOIA_FOLDER_ID_HERE'; // ← Change this
-  const AUDIT_SHEET_ID = 'YOUR_AUDIT_SHEET_ID_HERE'; // ← Change this
+  const FOLDER_ID = '1z09mWF5xEeFJdlsg2b-wP_MBoJmqhs7x'; // ← Change this
+  const AUDIT_SHEET_ID = '1y51ecyTCvypfauvFzBLDXLHoOtegXXbeOsEkTJj8QPU/edit?gid=0#gid=0'; // ← Change this
   
   const folder = DriveApp.getFolderById(FOLDER_ID);
   const auditSheet = SpreadsheetApp.openById(AUDIT_SHEET_ID).getSheetByName('Audit') || 
