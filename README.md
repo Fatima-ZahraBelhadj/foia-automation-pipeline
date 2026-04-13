@@ -1,20 +1,23 @@
-# FOIA Mixed-Media Automation Pipeline
+# FOIA Automated Ingestion & Validation Pipeline
 
-An automated data engineering pipeline designed to manage, transfer, and audit high-volume Freedom of Information Act (FOIA) public records. This system handles mixed-media datasets, including massive police bodycam/dashcam video files alongside highly sensitive legal documents and inter-agency memos.
+Automated Python and Google Apps Script (GAS) pipelines developed to ingest, structure, and validate high-volume Freedom of Information Act (FOIA) public records.
 
-## Overview
-Processing hundreds of FOIA requests involves navigating strict legal exemptions (e.g., National Security, Personal Privacy, Law Enforcement Records, and Privileged Communications). Moving these mixed-media files across disparate cloud architectures manually is highly error-prone and risks breaking the chain of custody. This repository contains the automation scripts used to securely transfer over 1,000 files while preserving strict, nested case-folder hierarchies.
+## Technical Implementation
+Managing large-scale public records requires strict adherence to legal formats and chain-of-custody protocols. This repository contains the tools used to process **1,000+ FOIA records**:
 
-## Architecture
-* **Google Apps Script (`CODE.gs`):** A recursive traversal algorithm that interacts directly with the Google Workspace API to securely clone nested folder structures, migrating massive `.mp4` evidentiary files and `.pdf` legal memos between cloud environments.
-* **Python Audit Tool (`foia_validator.py`):** A local script used post-sync to traverse the directories and generate immutable CSV audit logs. It automatically categorizes files (Evidentiary Media vs. Legal Documents) and logs ingestion timestamps for compliance.
+1. **Cloud Ingestion (`CODE.gs`):** A GAS recursive algorithm that structures and transfers massive record sets across cloud environments without breaking case-folder hierarchies.
+2. **Auto-Extraction & Validation (`foia_extractor_validator.py`):** A Python script that parses document contents via Regex, automatically extracting metadata (Case IDs, Dates, Statutory Exemptions). 
 
-## Insights & Future Work: Transition to AI Governance
-Building and operating this pipeline provided direct insight into the systemic vulnerabilities of institutional oversight. While this pipeline successfully automated the infrastructure of FOIA processing, it revealed a critical bottleneck in the human review phase, specifically regarding statutory exemptions.
+**Engineering Challenges:** This pipeline was specifically designed to handle inconsistent formats, detect missing fields, and enforce strict rule-based verification across messy, unstructured legal data.
 
-When law enforcement and legal reviewers were presented with highly structured, AI-generated summaries of these legal documents—such as automated justifications for withholding records based on "Personal Privacy" or "Law Enforcement Techniques"—I observed a severe tendency toward Automation Bias. Human operators were rubber-stamping outputs due to the "syntactic authority" (formal legalese, confident tone) of the generated text, failing to properly verify the underlying documents.
+## Insights & Application to Technical AI Governance
+Building the rules engines to validate these documents directly mirrored the evaluation challenges currently facing AI governance. 
 
-Next Steps: My current research pivots from automating data infrastructure to securing the human-AI oversight layer. This pipeline served as the foundational use-case for my proposed Aegis Active Auditor Framework—an adversarial UX interface designed to mitigate automation bias and enforce meaningful human control in high-stakes legal workflows.
+Through this work—specifically when analyzing how human reviewers interacted with the structured outputs of this pipeline—I observed firsthand how well-formatted, syntactically authoritative content (whether script-generated or AI-generated) can easily bypass human review. Reviewers succumb to the "syntactic authority" of the output, assuming the underlying data is correct simply because the formatting is flawless.
+
+My approach to this vulnerability is informed by the survey paper *“Exploring automation bias in human–AI collaboration”* (Romeo & Conti, 2025), as well as the **MIT AI Risk Repository**, particularly regarding *overreliance risks* (5.1).
+
+**Next Steps:** I aim to translate these exact engineering insights—moving from hard-coded data validation to behavioral human-AI validation—into evaluation pipelines and human-in-the-loop auditing interfaces for technical AI governance.
 
 ---
 Built by Monica  
