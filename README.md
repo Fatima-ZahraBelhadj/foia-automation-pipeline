@@ -1,29 +1,20 @@
-# FOIA Automation Pipeline
+# FOIA Mixed-Media Automation Pipeline
 
-**Automated Python + Google Apps Script pipelines to ingest and structure 1,000+ FOIA records (PDFs, emails, logs)**
+An automated data engineering pipeline designed to manage, transfer, and audit high-volume Freedom of Information Act (FOIA) public records. This system handles mixed-media datasets, including massive police bodycam/dashcam video files alongside highly sensitive legal documents and inter-agency memos.
 
-## Exact Description (matches my ERA application experience section)
-I developed automated Python/GAS pipelines to ingest and structure 1,000+ FOIA records, implementing auto-extraction, and rule-based validation.
+## Overview
+Processing hundreds of FOIA requests involves navigating strict legal exemptions (e.g., National Security, Personal Privacy, Law Enforcement Records, and Privileged Communications). Moving these mixed-media files across disparate cloud architectures manually is highly error-prone and risks breaking the chain of custody. This repository contains the automation scripts used to securely transfer over 1,000 files while preserving strict, nested case-folder hierarchies.
 
-This required handling inconsistent formats, detecting missing fields, and enforcing rule-based verification — mirroring evaluation challenges in AI governance.
+## Architecture
+* **Google Apps Script (`CODE.gs`):** A recursive traversal algorithm that interacts directly with the Google Workspace API to securely clone nested folder structures, migrating massive `.mp4` evidentiary files and `.pdf` legal memos between cloud environments.
+* **Python Audit Tool (`foia_validator.py`):** A local script used post-sync to traverse the directories and generate immutable CSV audit logs. It automatically categorizes files (Evidentiary Media vs. Legal Documents) and logs ingestion timestamps for compliance.
 
-Through this work, I observed how well-formatted AI content can bypass human review.
+## Insights & Future Work: Transition to AI Governance
+Building and operating this pipeline provided direct insight into the systemic vulnerabilities of institutional oversight. While this pipeline successfully automated the infrastructure of FOIA processing, it revealed a critical bottleneck in the human review phase, specifically regarding statutory exemptions.
 
-My approach is informed by the survey paper “Exploring automation bias in human–AI collaboration” (Romeo & Conti, 2025) as well the MIT AI Risk Repository, particularly overreliance risks (5.1).
+When law enforcement and legal reviewers were presented with highly structured, AI-generated summaries of these legal documents—such as automated justifications for withholding records based on "Personal Privacy" or "Law Enforcement Techniques"—I observed a severe tendency toward Automation Bias. Human operators were rubber-stamping outputs due to the "syntactic authority" (formal legalese, confident tone) of the generated text, failing to properly verify the underlying documents.
 
-I aim to translate these insights into evaluation pipelines and human-in-the-loop auditing interfaces for technical AI governance.
-
-## Tech Stack
-- Google Apps Script (Drive, Gmail, Sheets APIs)
-- Python (local validation & audit logging)
-- Built-in PDF text extraction + regex parsing
-
-## Repository Contents
-- `CODE.gs` → Main ingestion + extraction + validation pipeline
-- `foia_validator.py` → Python rule-based validation & audit script
-
-## Live Demo
-The pipeline is deployed in my Google Workspace and has processed >1,000 real FOIA records. Audit sheet and test data available upon request.
+Next Steps: My current research pivots from automating data infrastructure to securing the human-AI oversight layer. This pipeline served as the foundational use-case for my proposed Aegis Active Auditor Framework—an adversarial UX interface designed to mitigate automation bias and enforce meaningful human control in high-stakes legal workflows.
 
 ---
 Built by Monica  
